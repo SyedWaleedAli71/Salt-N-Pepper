@@ -1,0 +1,364 @@
+@font-face {
+    font-family: "futurak";
+    src: url(fonts/futura-pt-webfont.zip);
+}
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+*,
+body {
+    margin: 0;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    /* background-color: black; */
+}
+
+.header {
+    width: 100%;
+    background-color: black;
+    text-align: center;
+}
+
+.logo>img {
+    width: 170px;
+    margin-right: 230px;
+    margin-top: -40px;
+}
+
+.logo {
+    width: 30%;
+    vertical-align: bottom;
+}
+
+.right-side {
+    width: 55%;
+    padding: 20px 0px;
+    vertical-align: bottom;
+    text-align: right;
+}
+
+.logo,
+.right-side {
+    display: inline-block;
+}
+
+.menu>li {
+    display: inline-block;
+    color: aliceblue;
+    margin-right: 50px;
+    font-family: inter !important;
+    font-size: 26px;
+}
+
+.btns>button {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 35px;
+}
+
+.btn-one {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid#fff !important;
+}
+
+.btn-two {
+    background-color: #ed1c24;
+    border: 1px solid #ed1c24 !important;
+    color: #fff;
+}
+
+.btns,
+.menu {
+    display: inline-block;
+}
+
+.btn-two>i {
+    background-color: #fff;
+    color: #ed1c24;
+    padding: 10px;
+    margin-left: 2px;
+    border-radius: 100%;
+}
+
+.btn-two {
+    padding: 8px !important;
+}
+
+.slider {
+    width: 100% !important;
+    height: 650px;
+}
+
+.slider>img {
+    width: 100% !important;
+    height: 100%;
+}
+
+.intro {
+    background-color: black;
+    width: 100%;
+    height: 500px;
+    padding-top: 80px;
+}
+
+.intro>h2 {
+    text-align: center;
+    color: #fff;
+    margin: 0%;
+    font-size: 40px;
+}
+
+.intro>p {
+    color: rgb(255, 255, 255, 0.7);
+    text-align: center;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.intro>h2>span {
+    font-family: "futurak";
+    letter-spacing: 6px;
+    font-weight: 500px;
+    font-size: 52px;
+    text-decoration: underline;
+}
+
+.card-logo {
+    background-color: #fff;
+    width: 260px;
+    height: 130px !important;
+    text-align: center !important;
+    border-radius: 4px;
+    margin-top: 30px;
+}
+
+.card-logo>img {
+    width: 70%;
+    margin-top: 25px;
+}
+
+.card-btn>button {
+    padding: 15px 50px;
+    border: none;
+    border-radius: 35px;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgb(255, 255, 255, 0.3) !important;
+}
+
+.card-btn {
+    width: 250px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.card-cotainer {
+    display: flex;
+    text-align: center;
+    margin-top: 30px;
+    justify-content: space-evenly;
+    width: 65%;
+    margin-left: 320px;
+}
+
+.RestaurantFranchises {
+    width: 100%;
+    background-color: rgb(17, 20, 22);
+    background-image: url(./img/bg3.webp);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 300px;
+    padding-top: 90px;
+}
+
+.RestaurantText {
+    color: #fff;
+    text-align: center;
+}
+
+.RestaurantCard {
+    color: #fff;
+}
+
+.cardflax {
+    display: flex;
+    margin-top: 60px;
+    justify-content: space-evenly;
+}
+
+.RestaurantCard>h4 {
+    color: #ed1c24;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.RestaurantText>h1 {
+    font-size: 64px;
+   
+}
+.RestaurantCard>h1{
+     margin-top: 15px;
+    }
+.RestaurantCard>p {
+    font-size: 22px;
+    color: #918a8a;
+    line-height: 40px;
+   
+}
+.RestaurantCardPara{
+ margin-top: 15px;
+}
+
+.RestaurantCard-btn{
+    padding: 15px 50px;
+    border: none;
+    border-radius: 35px;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgb(255, 255, 255, 0.3) !important;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.RestaurantCard-btn>i{
+    background-color: #fff;
+    color: #ed1c24;
+    padding: 10px;
+    margin-left: 2px;
+    border-radius: 100%;
+}
+
+.card-2{
+    margin-right: 360px;
+}
+.FaisalabadDiv{
+    margin-left: -220px!important;
+}
+.Express-Franchises{
+background-color: black;
+width: 100%;
+padding-top: 90px;  
+background-image: url(./img/bg2.webp);
+background-repeat: no-repeat;
+background-size: cover;
+margin-top: 80px;
+} 
+
+.ExpressTwo>h1,h2{
+ color: #fff;
+ text-align: center;
+ font-size: 60px;
+}
+
+.ExpressFlax{
+    display: flex;
+   
+}
+
+.Express-Cards{
+     color: #fff;
+     text-align: center;
+     justify-content: center;
+margin-top: 40px;
+   margin-left: 140px;
+  
+
+}
+
+.Express-Cards>img{
+width: 450px;
+height: 50%;
+  border-radius: 10px;
+}
+
+.redPara{
+     color: #ed1c24;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.RestaurantCardPara{
+    color: #918a8a;
+}
+
+.VillageDiv{
+       background-color: rgb(11, 12, 14);
+
+}
+
+.VillageText{
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+}
+
+.villageFlax{
+    display: flex;
+     margin-top: 100px;
+     /* background-color: #ed1c24; */
+}
+
+.villageimg>img{
+    width: 117%;
+    /* border-radius: 30px; */
+}
+
+.villageText{
+    color: #fff;
+    font-size: 20px;
+    margin-left: 170px;
+    margin-top: 100px;
+}
+
+.OpeningSoon{
+    background-color: black;
+    width: 100%;
+}
+
+.OpeningText{
+    color: #fff;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 50px;
+}
+
+.iconFlax{
+    display: flex;
+    justify-content: center;
+margin: 20px;
+}
+
+.iconColor{
+    background-color: #fff;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    height: 200px;
+    width: 400px;
+    padding: 30px;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: 25px;
+}
+
+.OpeningHeading{
+    font-size: 40px;
+    font-style: bold;
+}
+.footerFlax{
+    display: flex;
+    color: #fff;
+}

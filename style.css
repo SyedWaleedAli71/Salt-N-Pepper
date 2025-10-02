@@ -22,7 +22,6 @@ body {
     margin-right: 0px;
     margin-bottom: 0px;
     margin-left: 0px;
-    /* background-color: black; */
 }
 
 .header {
@@ -208,22 +207,25 @@ body {
 
 .RestaurantText>h1 {
     font-size: 64px;
-   
+
 }
-.RestaurantCard>h1{
-     margin-top: 15px;
-    }
+
+.RestaurantCard>h1 {
+    margin-top: 15px;
+}
+
 .RestaurantCard>p {
     font-size: 22px;
     color: #918a8a;
     line-height: 40px;
-   
-}
-.RestaurantCardPara{
- margin-top: 15px;
+
 }
 
-.RestaurantCard-btn{
+.RestaurantCardPara {
+    margin-top: 15px;
+}
+
+.RestaurantCard-btn {
     padding: 15px 50px;
     border: none;
     border-radius: 35px;
@@ -233,7 +235,8 @@ body {
     margin-top: 40px;
     margin-left: 20px;
 }
-.RestaurantCard-btn>i{
+
+.RestaurantCard-btn>i {
     background-color: #fff;
     color: #ed1c24;
     padding: 10px;
@@ -241,107 +244,111 @@ body {
     border-radius: 100%;
 }
 
-.card-2{
+.card-2 {
     margin-right: 360px;
 }
-.FaisalabadDiv{
-    margin-left: -220px!important;
-}
-.Express-Franchises{
-background-color: black;
-width: 100%;
-padding-top: 90px;  
-background-image: url(./img/bg2.webp);
-background-repeat: no-repeat;
-background-size: cover;
-margin-top: 80px;
-} 
 
-.ExpressTwo>h1,h2{
- color: #fff;
- text-align: center;
- font-size: 60px;
+.FaisalabadDiv {
+    margin-left: -220px !important;
 }
 
-.ExpressFlax{
+.Express-Franchises {
+    background-color: black;
+    width: 100%;
+    padding-top: 90px;
+    background-image: url(./img/bg2.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 80px;
+     /* padding-bottom: 40px; */
+}
+
+.ExpressTwo>h1,
+h2 {
+    color: #fff;
+    text-align: center;
+    font-size: 60px;
+}
+
+.ExpressFlax {
     display: flex;
-   
 }
 
-.Express-Cards{
-     color: #fff;
-     text-align: center;
-     justify-content: center;
-margin-top: 40px;
-   margin-left: 140px;
-  
-
+.Express-Cards {
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: 140px;
 }
 
-.Express-Cards>img{
-width: 450px;
-height: 50%;
-  border-radius: 10px;
+.Express-Cards>img {
+    width: 450px;
+    height: 50%;
+    border-radius: 10px;
 }
 
-.redPara{
-     color: #ed1c24;
+.redPara {
+    color: #ed1c24;
     text-transform: uppercase;
     letter-spacing: 10px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.RestaurantCardPara{
+
+.RestaurantCardPara {
     color: #918a8a;
 }
 
-.VillageDiv{
-       background-color: rgb(11, 12, 14);
-
+.VillageDiv {
+    background-color: rgb(11, 12, 14);
+ padding-top: 60px;
 }
 
-.VillageText{
+.VillageText {
     color: #fff;
     text-align: center;
     font-size: 30px;
 }
 
-.villageFlax{
+.villageFlax {
     display: flex;
-     margin-top: 100px;
-     /* background-color: #ed1c24; */
+    margin-top: 100px;
+   
 }
 
-.villageimg>img{
+.villageimg>img {
     width: 117%;
-    /* border-radius: 30px; */
+   
 }
 
-.villageText{
+.villageText {
     color: #fff;
     font-size: 20px;
     margin-left: 170px;
     margin-top: 100px;
 }
 
-.OpeningSoon{
+.OpeningSoon {
     background-color: black;
     width: 100%;
+    padding-bottom: 60px;
+     /* padding-top: 60px; */
 }
 
-.OpeningText{
+.OpeningText {
     color: #fff;
     text-align: center;
     font-size: 25px;
     padding-top: 50px;
 }
 
-.iconFlax{
+.iconFlax {
     display: flex;
     justify-content: center;
-margin: 20px;
+    margin: 20px;
 }
 
-.iconColor{
+.iconColor {
     background-color: #fff;
     text-align: center;
     align-items: center;
@@ -354,11 +361,72 @@ margin: 20px;
     margin-left: 25px;
 }
 
-.OpeningHeading{
+.OpeningHeading {
     font-size: 40px;
     font-style: bold;
 }
-.footerFlax{
+
+.footerDiv{
+    padding-top: 30px;
+    /* background-color: aquamarine; */
+}
+.footerFlax {
     display: flex;
     color: #fff;
+    padding-left: 300px;
+}
+
+.footerOne{
+    width: 20%;
+    
+}
+
+.footerOne>img{
+    width: 70%;
+    height: 30%;
+    padding-top: 20px;
+}
+
+.footerOne>p{
+    color: #918a8a;
+}
+
+.SiteLinks{
+    padding-left: 140px;
+    padding-top: 20px;
+}
+.SiteLinks>h1{
+color: #fff;
+}
+
+.SiteLinks>h3{
+    color: #918a8a;
+    padding-top: 20px;
+}
+
+.ContactUs{
+    padding-left: 140px;
+    padding-top: 20px;
+}
+
+.ContactUs>p{
+    color: #918a8a;
+    padding-top: 20px;
+}
+
+.fbicon{
+    background-color: #ed1c24;
+    border: 10px solid rgb(201, 0, 0);
+    border-radius: 50%;
+    line-height: 70px;
+}
+
+.endfooter{
+    display: flex;
+background-color: black;
+width: 100%;
+color: #fff;
+font-size: 18px;
+justify-content: space-evenly;
+padding: 10px 0px 10px;
 }

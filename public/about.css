@@ -1,0 +1,1032 @@
+/* ============================================================
+   about.css — Salt'n Pepper About Us page styles
+   Extends style.css. Do not duplicate base resets/variables.
+   ============================================================ */
+
+/* ============================================================
+   ABOUT PAGE — ADDITIONAL ANIMATIONS
+   ============================================================ */
+@keyframes heroHeadingIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroEyebrowIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroImgReveal {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1); }
+}
+
+@keyframes iconPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+/* ============================================================
+   SHARED ABOUT UTILITIES
+   ============================================================ */
+.about-container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.about-eyebrow {
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.about-eyebrow--light {
+    color: rgba(237, 28, 36, 0.9);
+}
+
+.about-section-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.about-section-header h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.about-section-sub {
+    color: var(--muted);
+    font-size: clamp(15px, 2vw, 18px);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Shared CTA buttons — aligned with global .btn system */
+.about-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+    text-decoration: none;
+    line-height: 1;
+}
+
+.about-btn--red {
+    background-color: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+}
+
+.about-btn--red:hover {
+    background-color: var(--red-dark);
+    border-color: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(237, 28, 36, 0.38);
+}
+
+.about-btn--red i {
+    transition: transform var(--transition);
+}
+
+.about-btn--red:hover i {
+    transform: translateX(3px);
+}
+
+.about-btn--outline {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--border-btn);
+}
+
+.about-btn--outline:hover {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    transform: translateY(-2px);
+}
+
+.about-btn:active  { transform: translateY(0); }
+
+.about-btn:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   1. HERO SECTION
+   ============================================================ */
+.about-hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(340px, 48vw, 500px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: url('./img/aboutbanner.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: heroImgReveal 1.2s ease both;
+}
+
+.about-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.72) 100%
+    );
+}
+
+.about-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 80px 24px 60px;
+    max-width: 800px;
+}
+
+.about-hero__eyebrow {
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 16px;
+    animation: heroEyebrowIn 0.7s ease 0.1s both;
+}
+
+.about-hero__heading {
+    font-size: clamp(48px, 8vw, 96px);
+    color: var(--white);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    animation: heroHeadingIn 0.8s ease 0.25s both;
+}
+
+.about-hero__sub {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(16px, 2.2vw, 20px);
+    line-height: 1.7;
+    margin-top: 20px;
+    animation: heroSubIn 0.8s ease 0.5s both;
+}
+
+.about-hero__br {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .about-hero__br { display: inline; }
+}
+
+/* ============================================================
+   2. OUR STORY SECTION
+   ============================================================ */
+.about-story {
+    background-color: var(--bg-2);
+    padding: 96px 0;
+}
+
+.about-story .about-container {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    flex-wrap: wrap;
+}
+
+.about-story__img-wrap {
+    flex: 1 1 340px;
+    max-width: 520px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+    transition: box-shadow var(--transition-md);
+}
+
+.about-story__img-wrap:hover {
+    box-shadow: 0 12px 48px rgba(237, 28, 36, 0.18);
+}
+
+.about-story__img-wrap img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.about-story__img-wrap:hover img {
+    transform: scale(1.04);
+}
+
+.about-story__text {
+    flex: 1 1 340px;
+    color: var(--white);
+}
+
+.about-story__text h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 24px;
+    line-height: 1.15;
+}
+
+.about-story__text p {
+    color: var(--muted);
+    font-size: clamp(15px, 1.8vw, 17px);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.about-story__text .about-btn {
+    margin-top: 12px;
+}
+
+/* ============================================================
+   3. OUR MISSION SECTION
+   ============================================================ */
+.about-mission {
+    background-color: var(--bg-1);
+    padding: 96px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.about-mission__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+    flex-wrap: wrap;
+}
+
+.about-mission__text {
+    flex: 1 1 340px;
+    color: var(--white);
+}
+
+.about-mission__text h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 24px;
+    line-height: 1.15;
+}
+
+.about-mission__text p {
+    color: var(--muted);
+    font-size: clamp(15px, 1.8vw, 17px);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.about-mission__cards {
+    flex: 1 1 340px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.mission-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    color: var(--white);
+    transition: transform var(--transition), border-color var(--transition),
+                box-shadow var(--transition);
+}
+
+.mission-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(237, 28, 36, 0.4);
+    box-shadow: 0 8px 28px rgba(237, 28, 36, 0.12);
+}
+
+.mission-card i {
+    font-size: 24px;
+    color: var(--red);
+    margin-bottom: 14px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.mission-card:hover i {
+    animation: iconPop 0.4s ease;
+}
+
+.mission-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--white);
+}
+
+.mission-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ============================================================
+   4. WHAT MAKES US DIFFERENT
+   ============================================================ */
+.about-different {
+    background-color: var(--bg-2);
+    padding: 96px 0;
+}
+
+.about-diff-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.diff-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px 24px;
+    text-align: center;
+    color: var(--white);
+    transition: transform var(--transition), border-color var(--transition),
+                box-shadow var(--transition), background-color var(--transition);
+}
+
+.diff-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(237, 28, 36, 0.45);
+    box-shadow: 0 12px 36px rgba(237, 28, 36, 0.15);
+    background-color: rgba(237, 28, 36, 0.05);
+}
+
+.diff-card__icon {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(237, 28, 36, 0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.diff-card:hover .diff-card__icon {
+    background-color: var(--red);
+    transform: scale(1.1);
+}
+
+.diff-card__icon i {
+    font-size: 22px;
+    color: var(--red);
+    transition: color var(--transition);
+}
+
+.diff-card:hover .diff-card__icon i {
+    color: var(--white);
+}
+
+.diff-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--white);
+}
+
+.diff-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* ============================================================
+   5. OUR VALUES
+   ============================================================ */
+.about-values {
+    background-color: var(--bg-1);
+    padding: 96px 0;
+    border-top: 1px solid var(--border);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.value-item {
+    background-color: var(--surface);
+    padding: 48px 32px;
+    color: var(--white);
+    border-right: 1px solid var(--border);
+    transition: background-color var(--transition);
+}
+
+.value-item:last-child {
+    border-right: none;
+}
+
+.value-item:hover {
+    background-color: rgba(237, 28, 36, 0.06);
+}
+
+.value-item__number {
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(237, 28, 36, 0.18);
+    line-height: 1;
+    margin-bottom: 16px;
+    font-family: "futurak", system-ui, sans-serif;
+    transition: color var(--transition);
+}
+
+.value-item:hover .value-item__number {
+    color: rgba(237, 28, 36, 0.45);
+}
+
+.value-item h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: var(--white);
+}
+
+.value-item p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* ============================================================
+   6. RESTAURANT EXPERIENCE SECTION
+   ============================================================ */
+.about-experience {
+    position: relative;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: url('./img/sit-area.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.about-experience__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+}
+
+.about-experience__content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    padding: 80px 24px;
+    color: var(--white);
+}
+
+.about-experience__content h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    margin-bottom: 20px;
+    line-height: 1.15;
+}
+
+.about-experience__content p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(15px, 1.8vw, 17px);
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
+
+/* ============================================================
+   7. CALL TO ACTION SECTION
+   ============================================================ */
+.about-cta {
+    background-color: var(--bg-2);
+    padding: 96px 0;
+    border-top: 1px solid var(--border);
+}
+
+.about-cta__inner {
+    text-align: center;
+}
+
+.about-cta__inner h2 {
+    font-size: clamp(28px, 5vw, 56px);
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.15;
+}
+
+.about-cta__inner > p {
+    color: var(--muted);
+    font-size: clamp(15px, 2vw, 18px);
+    margin-bottom: 40px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+.about-cta__btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   SCROLL REVEAL — about page uses unified classes from style.css
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .about-hero {
+        animation: none;
+    }
+    .about-hero__eyebrow,
+    .about-hero__heading,
+    .about-hero__sub {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    .about-experience {
+        background-attachment: scroll;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — 1200px
+   ============================================================ */
+@media (max-width: 1200px) {
+    .about-diff-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .value-item:nth-child(2) {
+        border-right: none;
+    }
+
+    .value-item:nth-child(1),
+    .value-item:nth-child(2) {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .value-item:nth-child(3) {
+        border-right: 1px solid var(--border);
+    }
+
+    .value-item:nth-child(4) {
+        border-right: none;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — 1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+    .about-hero {
+        min-height: 420px;
+    }
+
+    .about-story .about-container,
+    .about-mission__inner {
+        gap: 40px;
+    }
+
+    .about-story__img-wrap img {
+        height: 380px;
+    }
+
+    .about-mission__cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-experience {
+        background-attachment: scroll;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — 768px
+   ============================================================ */
+@media (max-width: 768px) {
+    .about-hero {
+        min-height: 360px;
+    }
+
+    .about-hero__heading {
+        font-size: clamp(40px, 10vw, 64px);
+    }
+
+    /* Story — stack */
+    .about-story {
+        padding: 64px 0;
+    }
+
+    .about-story .about-container {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .about-story__img-wrap {
+        max-width: 100%;
+        flex: none;
+        width: 100%;
+    }
+
+    .about-story__img-wrap img {
+        height: 280px;
+    }
+
+    .about-story__text {
+        flex: none;
+        width: 100%;
+    }
+
+    /* Mission — stack */
+    .about-mission {
+        padding: 64px 0;
+    }
+
+    .about-mission__inner {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-mission__text,
+    .about-mission__cards {
+        flex: none;
+        width: 100%;
+    }
+
+    /* Different — 2 col */
+    .about-different {
+        padding: 64px 0;
+    }
+
+    .about-diff-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* Values — 2 col */
+    .about-values {
+        padding: 64px 0;
+    }
+
+    /* Experience */
+    .about-experience {
+        min-height: 400px;
+    }
+
+    /* CTA */
+    .about-cta {
+        padding: 64px 0;
+    }
+
+    .about-cta__btns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-btn {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — mobile reveal: reduce translateX distance
+   ============================================================ */
+@media (max-width: 768px) {
+    .reveal-left  { transform: translateX(-30px); }
+    .reveal-right { transform: translateX(30px); }
+    .reveal-left.is-visible,
+    .reveal-right.is-visible {
+        transform: translateX(0);
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — 480px
+   ============================================================ */
+@media (max-width: 480px) {
+    .about-hero {
+        min-height: 300px;
+    }
+
+    .about-hero__content {
+        padding: 60px 16px 48px;
+    }
+
+    .about-hero__heading {
+        font-size: clamp(36px, 12vw, 52px);
+    }
+
+    .about-story,
+    .about-mission,
+    .about-different,
+    .about-values,
+    .about-cta {
+        padding: 56px 0;
+    }
+
+    .about-container {
+        padding: 0 16px;
+    }
+
+    .about-story__img-wrap img {
+        height: 220px;
+    }
+
+    .about-mission__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .about-diff-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+        border-radius: 10px;
+    }
+
+    .value-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 36px 24px;
+    }
+
+    .value-item:last-child {
+        border-bottom: none;
+    }
+
+    .value-item:nth-child(1),
+    .value-item:nth-child(2),
+    .value-item:nth-child(3) {
+        border-right: none;
+    }
+
+    .about-experience__content {
+        padding: 56px 16px;
+    }
+
+    .about-section-header {
+        margin-bottom: 36px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — 375px / 320px
+   ============================================================ */
+@media (max-width: 375px) {
+    .about-hero__heading {
+        font-size: 36px;
+        letter-spacing: -0.5px;
+    }
+
+    .about-hero__sub {
+        font-size: 14px;
+    }
+
+    .about-btn {
+        font-size: 14px;
+        padding: 11px 24px;
+    }
+
+    .diff-card {
+        padding: 28px 18px;
+    }
+
+    .mission-card {
+        padding: 22px 16px;
+    }
+
+    .value-item {
+        padding: 28px 18px;
+    }
+
+    .value-item__number {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 320px) {
+    .about-hero__heading {
+        font-size: 30px;
+    }
+
+    .about-container {
+        padding: 0 12px;
+    }
+}
+
+/* ============================================================
+   ABOUT PAGE — ADDITIONAL MOBILE FIXES
+   (Supplements the existing breakpoints above)
+   ============================================================ */
+
+/* 600px — stack experience content, tighten CTA */
+@media (max-width: 600px) {
+    .about-story,
+    .about-mission,
+    .about-different,
+    .about-values,
+    .about-cta {
+        padding: 52px 0;
+    }
+
+    .about-experience {
+        min-height: 360px;
+    }
+
+    .about-experience__content {
+        padding: 52px 16px;
+    }
+
+    .about-cta__btns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .about-section-header {
+        margin-bottom: 36px;
+    }
+
+    .about-diff-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .about-mission__cards {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+/* 414px — tighten further */
+@media (max-width: 414px) {
+    .about-hero__heading {
+        font-size: clamp(34px, 10vw, 48px);
+    }
+
+    .about-hero__sub {
+        font-size: 14px;
+    }
+
+    .about-story__text h2,
+    .about-mission__text h2 {
+        font-size: clamp(24px, 7vw, 34px);
+    }
+
+    .diff-card {
+        padding: 28px 18px;
+    }
+
+    .mission-card {
+        padding: 22px 16px;
+    }
+}
+
+/* 360px */
+@media (max-width: 360px) {
+    .about-hero__heading {
+        font-size: 30px;
+    }
+
+    .about-container {
+        padding: 0 14px;
+    }
+
+    .about-cta__inner h2 {
+        font-size: clamp(24px, 8vw, 36px);
+    }
+}
+
+/* ============================================================
+   FINAL ABOUT PAGE MOBILE POLISH
+   ============================================================ */
+html,
+body,
+main,
+.about-hero,
+.about-story,
+.about-mission,
+.about-different,
+.about-values,
+.about-experience,
+.about-cta {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .about-hero__content,
+    .about-experience__content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .about-hero__sub {
+        max-width: 620px;
+    }
+
+    .about-hero__br {
+        display: none;
+    }
+
+    .about-story__text,
+    .about-mission__text,
+    .about-mission__cards,
+    .about-diff-grid,
+    .values-grid {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .about-story__img-wrap,
+    .about-story__img-wrap img {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .about-hero__content,
+    .about-experience__content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .about-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 320px) {
+    .about-container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .about-hero__content,
+    .about-experience__content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}

@@ -1,0 +1,3024 @@
+/* ============================================================
+   SALT'N PEPPER — style.css
+   ============================================================ */
+
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+:root {
+    --red:           #ed1c24;
+    --red-dark:      #c8151c;
+    --red-subtle:    rgba(237, 28, 36, 0.08);
+    --black:         #000;
+    --bg-0:          #0a0a0a;
+    --bg-1:          #0f1012;
+    --bg-2:          #141618;
+    --bg-3:          #1a1c1f;
+    --bg-4:          #1f2124;
+    --surface:       rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --border:        rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --muted:         #8a8480;
+    --muted-light:   #b0aaa6;
+    --white:         #fff;
+    --border-btn:    rgba(255,255,255,0.28);
+    --transition:    0.22s ease;
+    --transition-md: 0.35s ease;
+    --radius-sm:     6px;
+    --radius:        10px;
+    --radius-lg:     16px;
+    --radius-pill:   100px;
+    --container:     1200px;
+    --section-pad:   96px;
+    --section-pad-sm:60px;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-0);
+    color: var(--white);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+main {
+    overflow-x: clip;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+ul { list-style: none; }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    background: none;
+}
+
+/* ============================================================
+   FONT FACE
+   ============================================================ */
+@font-face {
+    font-family: "futurak";
+    src: url('fonts/FuturaCyrillicBook.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroScale {
+    from { transform: scale(1.06); }
+    to   { transform: scale(1); }
+}
+
+@keyframes pageReveal {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes heroTitleIn {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroSubIn {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroActionsIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   PAGE LOAD ANIMATION
+   ============================================================ */
+body {
+    animation: pageReveal 0.4s ease both;
+}
+
+.header {
+    animation: fadeInDown 0.5s ease 0.05s both;
+}
+
+.slider {
+    animation: fadeIn 0.7s ease 0.1s both;
+}
+
+.intro {
+    animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* ============================================================
+   SCROLL REVEAL — unified directional system
+   ============================================================ */
+
+/* LEFT — enters from left */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* RIGHT — enters from right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* UP — section headings / centred text */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* IMAGE — fade + scale pop */
+.reveal-image {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-image.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* BUTTON — bottom popup */
+.reveal-button {
+    opacity: 0;
+    transform: translateY(35px) scale(0.96);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-button.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* SCALE — cards popup */
+.reveal-scale {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Stagger delays */
+.reveal-delay-1 { transition-delay: 0.10s; }
+.reveal-delay-2 { transition-delay: 0.20s; }
+.reveal-delay-3 { transition-delay: 0.30s; }
+.reveal-delay-4 { transition-delay: 0.40s; }
+
+/* Legacy alias — keep so nothing breaks */
+.animate-fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.animate-fade-up.visible,
+.animate-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+    }
+    .reveal-left,
+    .reveal-right,
+    .reveal-up,
+    .reveal-image,
+    .reveal-button,
+    .reveal-scale,
+    .animate-fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .hero-title,
+    .hero-sub,
+    .hero-actions {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Mobile: reduce horizontal travel to prevent overflow */
+@media (max-width: 768px) {
+    .reveal-left  { transform: translateX(-30px); }
+    .reveal-right { transform: translateX(30px); }
+    .reveal-left.is-visible,
+    .reveal-right.is-visible {
+        transform: translateX(0);
+    }
+}
+
+/* ============================================================
+   SHARED CONTAINER
+   ============================================================ */
+.container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* ============================================================
+   SHARED BUTTON SYSTEM
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.btn:active  { transform: translateY(0) !important; }
+
+.btn:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+}
+
+.btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: var(--white);
+    color: var(--red);
+    border-radius: 50%;
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+}
+
+.btn:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+.btn-red {
+    background-color: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+}
+
+.btn-red:hover {
+    background-color: var(--red-dark);
+    border-color: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(237,28,36,0.35);
+}
+
+.btn-ghost {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--border-btn);
+}
+
+.btn-ghost:hover {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-white {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+}
+
+.btn-white:hover {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+    width: 100%;
+    background-color: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 68px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 130px;
+    height: auto;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.menu li a {
+    display: block;
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    position: relative;
+    transition: color var(--transition);
+}
+
+.menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 1.5px;
+    background-color: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+
+.menu li a:hover { color: var(--white); }
+
+.menu li a:hover::after,
+.menu li a.nav-active::after {
+    transform: scaleX(1);
+}
+
+.menu li a.nav-active { color: var(--white); }
+
+.menu li a:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-one {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 9px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    background-color: transparent;
+    color: rgba(255,255,255,0.85);
+    border: 1px solid var(--border-strong);
+    cursor: pointer;
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.btn-one:hover {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    transform: translateY(-1px);
+}
+
+.btn-one:active  { transform: translateY(0); }
+
+.btn-one:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}
+
+.btn-two {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 10px 9px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    background-color: var(--red);
+    color: var(--white);
+    border: 1px solid var(--red);
+    cursor: pointer;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.btn-two:hover {
+    background-color: var(--red-dark);
+    border-color: var(--red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(237,28,36,0.4);
+}
+
+.btn-two:active  { transform: translateY(0); }
+
+.btn-two:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+}
+
+.btn-two i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background-color: var(--white);
+    color: var(--red);
+    border-radius: 50%;
+    font-size: 10px;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+}
+
+.btn-two:hover i { transform: translateX(3px); }
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 210;
+    border-radius: var(--radius-sm);
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav-toggle:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   HERO / SLIDER
+   ============================================================ */
+.slider {
+    width: 100%;
+    height: clamp(520px, 90vh, 820px);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-2);
+    background-image: url('./img/sit-area.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.30) 45%,
+        rgba(0, 0, 0, 0.72) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 860px;
+    width: 100%;
+}
+
+.hero-title {
+    color: var(--white);
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+    animation: heroTitleIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.hero-sub {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(15px, 1.8vw, 19px);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 22px auto 0;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    animation: heroSubIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+    animation: heroActionsIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.62s both;
+}
+
+.slider > *:not(.hero-video):not(.hero-overlay) {
+    position: relative;
+    z-index: 2;
+}
+
+.slider::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: linear-gradient(to bottom, transparent, var(--bg-1));
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* ============================================================
+   INTRO / BRANDS SECTION
+   ============================================================ */
+.intro {
+    background-color: var(--bg-1);
+    width: 100%;
+    padding: var(--section-pad) 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.intro h2 {
+    color: var(--white);
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+}
+
+.intro h2 span {
+    font-family: "futurak", system-ui, sans-serif;
+    letter-spacing: 5px;
+    font-weight: 500;
+    font-size: clamp(28px, 4.5vw, 48px);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    color: var(--white);
+}
+
+.intro > p {
+    color: var(--muted);
+    padding-top: 14px;
+    font-size: clamp(14px, 1.8vw, 16px);
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.card-cotainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 48px;
+    max-width: var(--container);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform var(--transition);
+}
+
+.cards:hover { transform: translateY(-5px); }
+
+.card-logo {
+    background-color: var(--white);
+    width: 220px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    transition: box-shadow var(--transition-md);
+}
+
+.cards:hover .card-logo {
+    box-shadow: 0 8px 28px rgba(237,28,36,0.2);
+}
+
+.card-logo img {
+    width: 68%;
+    height: auto;
+    transition: transform var(--transition-md);
+}
+
+.cards:hover .card-logo img { transform: scale(1.06); }
+
+.card-btn button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 36px;
+    border-radius: var(--radius-pill);
+    background-color: transparent;
+    color: rgba(255,255,255,0.75);
+    border: 1px solid var(--border-btn);
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.card-btn button:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.card-btn button:active  { transform: translateY(0); }
+
+.card-btn button:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   RESTAURANT FRANCHISES SECTION
+   ============================================================ */
+.RestaurantFranchises {
+    width: 100%;
+    background-color: var(--bg-2);
+    padding-top: var(--section-pad);
+    padding-bottom: 0;
+}
+
+.RestaurantText {
+    color: var(--white);
+    text-align: center;
+    padding: 0 32px;
+    max-width: var(--container);
+    margin: 0 auto;
+}
+
+.RestaurantText h2 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.RestaurantText h3 {
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 400;
+    color: var(--muted-light);
+    margin-top: 6px;
+}
+
+.RestaurantText p {
+    color: var(--muted);
+    font-size: clamp(13px, 1.6vw, 15px);
+    margin-top: 14px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.RestaurantText::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 2px;
+    background-color: var(--red);
+    margin: 24px auto 0;
+    border-radius: 2px;
+}
+
+.cardflax {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 56px;
+    flex-wrap: wrap;
+    margin-top: 72px;
+    padding: 0 32px 72px;
+    max-width: var(--container);
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 1px solid var(--border);
+}
+
+.cardflax:last-of-type { border-bottom: none; }
+
+.cardflax--reverse { flex-direction: row-reverse; }
+
+.RestaurantCard {
+    color: var(--white);
+    flex: 1 1 300px;
+    max-width: 440px;
+}
+
+.RestaurantCard h4 {
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.RestaurantCard h2 {
+    margin-top: 10px;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+}
+
+.RestaurantCard p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.RestaurantCardPara {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.RestaurantCardPara span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: var(--red-subtle);
+    border-radius: 50%;
+    color: var(--red);
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.franchise-img {
+    flex: 1 1 320px;
+    max-width: 520px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    transition: box-shadow var(--transition-md);
+}
+
+.franchise-img:hover {
+    box-shadow: 0 12px 48px rgba(237,28,36,0.18);
+}
+
+.franchise-img img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.franchise-img:hover img { transform: scale(1.04); }
+
+.RestaurantCard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 11px 22px 11px 26px;
+    border-radius: var(--radius-pill);
+    background-color: transparent;
+    color: rgba(255,255,255,0.82);
+    border: 1px solid var(--border-btn);
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.RestaurantCard-btn:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(237,28,36,0.3);
+}
+
+.RestaurantCard-btn:active  { transform: translateY(0); }
+
+.RestaurantCard-btn:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+}
+
+.RestaurantCard-btn i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background-color: var(--white);
+    color: var(--red);
+    border-radius: 50%;
+    font-size: 10px;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+}
+
+.RestaurantCard-btn:hover i { transform: translateX(3px); }
+
+/* ============================================================
+   EXPRESS FRANCHISES SECTION
+   ============================================================ */
+.Express-Franchises {
+    background-color: var(--bg-1);
+    width: 100%;
+    padding: var(--section-pad) 32px;
+    background-image: url(./img/bg2.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.Express-Franchises::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(10,10,10,0.82);
+    pointer-events: none;
+}
+
+.Express-Franchises > * {
+    position: relative;
+    z-index: 1;
+}
+
+.ExpressTwo {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.ExpressTwo h2 {
+    color: var(--white);
+    font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.ExpressTwo h3 {
+    color: var(--muted-light);
+    font-size: clamp(16px, 2.5vw, 26px);
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+.ExpressTwo::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: var(--red);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+
+.ExpressGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: var(--container);
+    margin: 48px auto 0;
+}
+
+.Express-Cards {
+    background-color: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    color: var(--white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-md), box-shadow var(--transition-md), border-color var(--transition);
+}
+
+.Express-Cards:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    border-color: rgba(237,28,36,0.3);
+}
+
+.Express-Cards > img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: transform 0.5s ease;
+}
+
+.Express-Cards:hover > img { transform: scale(1.05); }
+
+.Express-Cards .card-body {
+    padding: 20px 18px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.Express-Cards .redPara {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.Express-Cards h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.Express-Cards .RestaurantCardPara {
+    margin-top: 8px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.Express-Cards .RestaurantCard-btn {
+    align-self: center;
+    font-size: 12px;
+    padding: 9px 18px 9px 20px;
+    margin-top: 16px;
+}
+
+.Express-Cards .RestaurantCard-btn i {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+}
+
+.redPara {
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* ============================================================
+   VILLAGE FRANCHISE SECTION
+   ============================================================ */
+.VillageDiv {
+    background-color: var(--bg-2);
+    padding: var(--section-pad) 32px;
+    border-top: 1px solid var(--border);
+}
+
+.VillageText {
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.VillageText h2 {
+    font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.VillageText h3 {
+    font-size: clamp(16px, 2.5vw, 26px);
+    font-weight: 400;
+    color: var(--muted-light);
+    margin-top: 6px;
+}
+
+.VillageText::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: var(--red);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+
+.villageFlax {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    flex-wrap: wrap;
+    max-width: var(--container);
+    margin: 0 auto;
+}
+
+.villageimg {
+    flex: 1 1 320px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    transition: box-shadow var(--transition-md);
+}
+
+.villageimg:hover {
+    box-shadow: 0 12px 48px rgba(237,28,36,0.18);
+}
+
+.villageimg img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.villageimg:hover img { transform: scale(1.04); }
+
+.villageText {
+    color: var(--white);
+    flex: 1 1 280px;
+}
+
+.villageText h2 {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    letter-spacing: -0.2px;
+}
+
+/* ============================================================
+   OPENING SOON SECTION
+   ============================================================ */
+.OpeningSoon {
+    background-color: var(--bg-1);
+    width: 100%;
+    padding: var(--section-pad) 32px;
+    border-top: 1px solid var(--border);
+}
+
+.OpeningText {
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.OpeningText h2 {
+    font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.OpeningText h3 {
+    font-size: clamp(16px, 2.5vw, 26px);
+    font-weight: 400;
+    color: var(--muted-light);
+    margin-top: 6px;
+}
+
+.OpeningText::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: var(--red);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+
+.iconFlax {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    max-width: var(--container);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.iconColor {
+    background-color: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--white);
+    text-align: center;
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    width: 260px;
+    transition: transform var(--transition-md), box-shadow var(--transition-md), border-color var(--transition);
+}
+
+.iconColor:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+    border-color: rgba(237,28,36,0.3);
+}
+
+.iconColor img {
+    width: 52px;
+    height: auto;
+    margin: 0 auto 12px;
+    opacity: 0.85;
+}
+
+.iconColor h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.OpeningHeading {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+/* ============================================================
+   FOOTER — Premium
+   ============================================================ */
+.site-footer {
+    position: relative;
+    overflow: hidden;
+    background-image: url('./img/bg1.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.20);
+}
+
+/* Dark overlay — contained entirely inside the footer */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(5, 5, 7, 0.93) 0%,
+        rgba(5, 5, 7, 0.88) 60%,
+        rgba(5, 5, 7, 0.97) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* All footer content sits above the overlay */
+.footer-inner,
+.footer-bottom {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 80px 32px 56px;
+}
+
+/* 4-column grid */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.4fr 1.2fr;
+    gap: 48px;
+    align-items: start;
+}
+
+/* Brand column */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.footer-logo-link {
+    display: inline-block;
+    width: fit-content;
+    transition: opacity var(--transition);
+}
+
+.footer-logo-link:hover { opacity: 0.8; }
+
+.footer-logo-link img {
+    width: 130px;
+    height: auto;
+    display: block;
+}
+
+.footer-brand p {
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.8;
+    max-width: 300px;
+}
+
+.footer-legal {
+    color: var(--muted) !important;
+    font-size: 12px !important;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+/* Column headings */
+.footer-heading {
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 28px;
+    height: 2px;
+    background-color: var(--red);
+    border-radius: 2px;
+}
+
+.footer-heading--apps { margin-top: 32px; }
+
+/* Nav links */
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.footer-links li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 13.5px;
+    padding: 5px 0;
+    transition: color var(--transition), gap var(--transition);
+}
+
+.footer-links li a i {
+    font-size: 9px;
+    color: var(--red);
+    opacity: 0.7;
+    flex-shrink: 0;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.footer-links li a:hover {
+    color: var(--white);
+    gap: 12px;
+}
+
+.footer-links li a:hover i {
+    transform: translateX(3px);
+    opacity: 1;
+}
+
+.footer-links li a:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Contact list */
+.footer-contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.footer-contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: var(--red-subtle);
+    border: 1px solid rgba(237, 28, 36, 0.2);
+    border-radius: 50%;
+    color: var(--red);
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.footer-contact-list li:hover .footer-contact-icon {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+}
+
+/* Social icons */
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    color: var(--muted-light);
+    font-size: 13px;
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.footer-social-icon:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+.footer-social-icon:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+}
+
+/* App badges */
+.footer-apps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.app-badge {
+    display: block;
+    width: fit-content;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.app-badge img {
+    height: 36px;
+    width: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+.app-badge:hover {
+    transform: translateY(-2px);
+    opacity: 0.82;
+}
+
+/* Footer bottom bar */
+.footer-bottom {
+    border-top: 1px solid var(--border);
+}
+
+.footer-bottom-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.footer-bottom-link {
+    color: var(--muted-light);
+    transition: color var(--transition);
+}
+
+.footer-bottom-link:hover { color: var(--white); }
+
+/* ============================================================
+   FOOTER RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+    .footer-grid {
+        grid-template-columns: 1.8fr 1fr 1.3fr 1.1fr;
+        gap: 36px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 32px;
+    }
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+    .footer-brand p { max-width: 560px; }
+}
+
+@media (max-width: 768px) {
+    .footer-inner { padding: 56px 20px 40px; }
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 24px;
+    }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-bottom-inner {
+        padding: 14px 20px;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .footer-brand p { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+    .footer-inner { padding: 48px 16px 36px; }
+    .footer-logo-link img { width: 110px; }
+    .footer-bottom-inner {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 375px) {
+    .footer-logo-link img { width: 96px; }
+    .footer-heading {
+        font-size: 10px;
+        letter-spacing: 4px;
+    }
+}
+
+@media (max-width: 320px) {
+    .footer-inner { padding: 40px 12px 28px; }
+}
+
+/* ============================================================
+   RESPONSIVE — COMPLETE MOBILE & TABLET SYSTEM
+   All breakpoints: 1024 · 768 · 600 · 480 · 414 · 375 · 320
+   ============================================================ */
+
+/* ============================================================
+   1024px — Small desktop / large tablet
+   ============================================================ */
+@media (max-width: 1024px) {
+    :root {
+        --section-pad: 72px;
+    }
+
+    .header-inner {
+        padding: 0 24px;
+    }
+
+    /* Show hamburger, hide desktop nav */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Mobile nav drawer */
+    .right-side {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 85vw);
+        background-color: rgba(10, 10, 12, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border-strong);
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        padding: 80px 28px 40px;
+        z-index: 205;
+        transform: translateX(100%);
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        overflow-y: auto;
+    }
+
+    .right-side.nav-open {
+        transform: translateX(0);
+    }
+
+    /* Nav links — stacked, large tap targets */
+    .menu {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+    }
+
+    .menu li a {
+        font-size: 17px;
+        font-weight: 500;
+        padding: 14px 4px;
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    .menu li:last-child a {
+        border-bottom: none;
+    }
+
+    .menu li a::after {
+        display: none;
+    }
+
+    .menu li a.nav-active {
+        color: var(--red);
+    }
+
+    /* Buttons — stacked full-width in drawer */
+    .btns {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-top: 28px;
+        width: 100%;
+    }
+
+    .btn-one,
+    .btn-two {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 20px;
+        font-size: 14px;
+    }
+
+    .btn-two {
+        padding: 13px 20px;
+    }
+
+    /* Overlay behind drawer */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 204;
+        backdrop-filter: blur(2px);
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+
+    /* Franchise rows — reduce gap */
+    .cardflax {
+        gap: 36px;
+        padding: 0 24px 56px;
+        margin-top: 56px;
+    }
+
+    /* Express grid — 2 columns */
+    .ExpressGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* Village */
+    .villageFlax {
+        gap: 36px;
+    }
+
+    /* Opening soon cards */
+    .iconColor {
+        width: 220px;
+    }
+}
+
+/* ============================================================
+   768px — Tablet portrait
+   ============================================================ */
+@media (max-width: 768px) {
+    :root {
+        --section-pad: 60px;
+    }
+
+    .header-inner {
+        padding: 0 20px;
+        min-height: 62px;
+    }
+
+    .logo img {
+        width: 110px;
+    }
+
+    /* Hero */
+    .slider {
+        height: clamp(480px, 85vh, 680px);
+    }
+
+    .hero-content {
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-size: clamp(32px, 7vw, 52px);
+        letter-spacing: -0.5px;
+    }
+
+    .hero-sub {
+        font-size: clamp(14px, 3.5vw, 17px);
+        margin-top: 16px;
+        max-width: 100%;
+    }
+
+    .hero-actions {
+        gap: 12px;
+        margin-top: 28px;
+    }
+
+    /* Intro */
+    .intro {
+        padding: var(--section-pad) 20px;
+    }
+
+    .intro h2 span {
+        letter-spacing: 3px;
+    }
+
+    .card-cotainer {
+        gap: 16px;
+        margin-top: 36px;
+    }
+
+    .card-logo {
+        width: 190px;
+        height: 96px;
+    }
+
+    /* Restaurant franchises */
+    .RestaurantFranchises {
+        padding-top: var(--section-pad);
+    }
+
+    .RestaurantText {
+        padding: 0 20px;
+    }
+
+    /* Franchise rows — stack vertically */
+    .cardflax,
+    .cardflax--reverse {
+        flex-direction: column;
+        gap: 28px;
+        padding: 0 20px 48px;
+        margin-top: 48px;
+    }
+
+    .RestaurantCard {
+        max-width: 100%;
+        flex: none;
+        width: 100%;
+    }
+
+    .franchise-img {
+        max-width: 100%;
+        flex: none;
+        width: 100%;
+    }
+
+    .franchise-img img {
+        height: 260px;
+    }
+
+    /* Express */
+    .Express-Franchises {
+        padding: var(--section-pad) 20px;
+    }
+
+    .ExpressGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+    }
+
+    /* Village */
+    .VillageDiv {
+        padding: var(--section-pad) 20px;
+    }
+
+    .VillageText {
+        margin-bottom: 40px;
+    }
+
+    .villageFlax {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .villageimg {
+        flex: none;
+        width: 100%;
+    }
+
+    .villageimg img {
+        height: 280px;
+    }
+
+    .villageText {
+        flex: none;
+        width: 100%;
+    }
+
+    /* Opening soon */
+    .OpeningSoon {
+        padding: var(--section-pad) 20px;
+    }
+
+    .iconFlax {
+        gap: 16px;
+        margin-top: 32px;
+    }
+
+    .iconColor {
+        width: calc(50% - 8px);
+        min-width: 140px;
+        padding: 22px 14px;
+    }
+}
+
+/* ============================================================
+   600px — Large mobile / small tablet
+   ============================================================ */
+@media (max-width: 600px) {
+    :root {
+        --section-pad: 52px;
+    }
+
+    /* Hero */
+    .slider {
+        height: clamp(440px, 80vh, 600px);
+    }
+
+    .hero-title {
+        font-size: clamp(28px, 8vw, 44px);
+    }
+
+    .hero-sub {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    /* Intro */
+    .intro {
+        padding: var(--section-pad) 16px;
+    }
+
+    .card-cotainer {
+        gap: 14px;
+    }
+
+    .card-logo {
+        width: 170px;
+        height: 86px;
+    }
+
+    /* Express grid — 1 column */
+    .ExpressGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .Express-Cards > img {
+        height: 180px;
+    }
+
+    /* Opening soon — 1 per row on very small */
+    .iconColor {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .iconFlax {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* ============================================================
+   480px — Mobile
+   ============================================================ */
+@media (max-width: 480px) {
+    :root {
+        --section-pad: 48px;
+    }
+
+    .header-inner {
+        padding: 0 16px;
+        min-height: 58px;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    /* Hero */
+    .slider {
+        height: clamp(420px, 78vh, 560px);
+    }
+
+    .hero-content {
+        padding: 0 16px;
+    }
+
+    .hero-title {
+        font-size: clamp(26px, 8.5vw, 40px);
+        line-height: 1.15;
+    }
+
+    .hero-sub {
+        font-size: 14px;
+        margin-top: 14px;
+    }
+
+    .hero-actions {
+        margin-top: 24px;
+    }
+
+    /* Intro */
+    .intro {
+        padding: var(--section-pad) 16px;
+    }
+
+    .card-cotainer {
+        gap: 12px;
+    }
+
+    .card-logo {
+        width: 155px;
+        height: 78px;
+    }
+
+    .card-btn button {
+        padding: 9px 24px;
+        font-size: 12px;
+    }
+
+    /* Franchise sections */
+    .RestaurantFranchises {
+        padding-top: var(--section-pad);
+    }
+
+    .RestaurantText {
+        padding: 0 16px;
+    }
+
+    .cardflax,
+    .cardflax--reverse {
+        padding: 0 16px 40px;
+        margin-top: 40px;
+        gap: 24px;
+    }
+
+    .franchise-img img {
+        height: 220px;
+    }
+
+    .RestaurantCard h2 {
+        font-size: clamp(18px, 5vw, 24px);
+    }
+
+    .RestaurantCard-btn {
+        padding: 10px 18px 10px 20px;
+        font-size: 12px;
+        margin-top: 18px;
+    }
+
+    .RestaurantCard-btn i {
+        width: 22px;
+        height: 22px;
+        font-size: 9px;
+    }
+
+    /* Express */
+    .Express-Franchises {
+        padding: var(--section-pad) 16px;
+    }
+
+    /* Village */
+    .VillageDiv {
+        padding: var(--section-pad) 16px;
+    }
+
+    .villageimg img {
+        height: 240px;
+    }
+
+    /* Opening soon */
+    .OpeningSoon {
+        padding: var(--section-pad) 16px;
+    }
+
+    .iconColor {
+        max-width: 260px;
+        padding: 20px 14px;
+    }
+
+    .iconColor h3 {
+        font-size: 13px;
+    }
+}
+
+/* ============================================================
+   414px — iPhone Plus / large Android
+   ============================================================ */
+@media (max-width: 414px) {
+    .hero-title {
+        font-size: clamp(24px, 8vw, 36px);
+    }
+
+    .card-logo {
+        width: 145px;
+        height: 72px;
+    }
+
+    .intro h2 {
+        font-size: clamp(20px, 6vw, 28px);
+    }
+
+    .intro h2 span {
+        font-size: clamp(22px, 7vw, 32px);
+        letter-spacing: 2px;
+    }
+}
+
+/* ============================================================
+   375px — iPhone SE / standard iPhone
+   ============================================================ */
+@media (max-width: 375px) {
+    .header-inner {
+        padding: 0 14px;
+    }
+
+    .logo img {
+        width: 92px;
+    }
+
+    .hero-title {
+        font-size: clamp(22px, 7.5vw, 32px);
+        letter-spacing: -0.3px;
+    }
+
+    .hero-sub {
+        font-size: 13.5px;
+    }
+
+    .hero-actions .btn {
+        max-width: 260px;
+        font-size: 13px;
+        padding: 11px 20px;
+    }
+
+    .card-logo {
+        width: 135px;
+        height: 68px;
+    }
+
+    .card-btn button {
+        padding: 8px 20px;
+        font-size: 12px;
+    }
+
+    .RestaurantText h2 {
+        font-size: clamp(26px, 8vw, 36px);
+    }
+
+    .RestaurantText h3 {
+        font-size: clamp(16px, 5vw, 22px);
+    }
+
+    .franchise-img img {
+        height: 200px;
+    }
+
+    .villageimg img {
+        height: 210px;
+    }
+
+    .iconColor {
+        max-width: 240px;
+    }
+
+    .right-side {
+        width: 88vw;
+        padding: 72px 20px 36px;
+    }
+}
+
+/* ============================================================
+   360px — Common Android
+   ============================================================ */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 22px;
+    }
+
+    .card-logo {
+        width: 128px;
+        height: 64px;
+    }
+
+    .intro h2 span {
+        letter-spacing: 1px;
+    }
+}
+
+/* ============================================================
+   320px — Smallest supported
+   ============================================================ */
+@media (max-width: 320px) {
+    .header-inner {
+        padding: 0 12px;
+    }
+
+    .logo img {
+        width: 84px;
+    }
+
+    .hero-title {
+        font-size: 20px;
+    }
+
+    .hero-sub {
+        font-size: 13px;
+    }
+
+    .hero-actions .btn {
+        max-width: 240px;
+        font-size: 12px;
+        padding: 10px 16px;
+    }
+
+    .card-logo {
+        width: 120px;
+        height: 60px;
+    }
+
+    .card-btn button {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+
+    .cardflax,
+    .cardflax--reverse {
+        padding: 0 12px 36px;
+    }
+
+    .RestaurantText {
+        padding: 0 12px;
+    }
+
+    .Express-Franchises,
+    .VillageDiv,
+    .OpeningSoon {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .intro {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .right-side {
+        width: 92vw;
+        padding: 68px 16px 32px;
+    }
+
+    .menu li a {
+        font-size: 15px;
+        padding: 12px 4px;
+    }
+
+    .iconColor {
+        max-width: 220px;
+        padding: 18px 12px;
+    }
+}
+
+/* ============================================================
+   NAV OVERLAY — injected by JS, shown when drawer is open
+   ============================================================ */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 204;
+}
+
+.nav-overlay.active {
+    display: block;
+}
+
+
+/* ============================================================
+   FINAL MOBILE RESPONSIVE FIX
+   This section intentionally overrides the older mobile drawer
+   rules above. Desktop styles remain unchanged.
+   ============================================================ */
+
+@media (max-width: 1024px) {
+    /* Keep the header itself full-width and above the overlay. */
+    .header {
+        z-index: 300;
+        width: 100%;
+    }
+
+    .header-inner {
+        position: relative;
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+        position: relative;
+        z-index: 305;
+        flex-shrink: 0;
+    }
+
+    /*
+     * IMPORTANT:
+     * Use a full-width dropdown instead of a right-side drawer.
+     * This prevents the mobile page from being squeezed into a
+     * narrow column and eliminates the black empty space issue.
+     */
+    .right-side {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        width: 100%;
+        max-width: none;
+        max-height: calc(100vh - 58px);
+        min-width: 0;
+        margin: 0;
+        padding: 22px 20px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        background: #0a0a0c;
+        border: 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+            transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.22s ease,
+            visibility 0s linear 0.28s;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 301;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .right-side.nav-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+            transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.22s ease,
+            visibility 0s linear 0s;
+    }
+
+    .right-side nav {
+        width: 100%;
+    }
+
+    .menu {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .menu li {
+        width: 100%;
+    }
+
+    .menu li a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        min-height: 50px;
+        padding: 14px 4px;
+        color: rgba(255,255,255,0.9);
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+    }
+
+    .menu li a::after {
+        display: none;
+    }
+
+    .menu li a.nav-active {
+        color: var(--red);
+    }
+
+    .btns {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn-one,
+    .btn-two {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+
+    /* Backdrop stays behind the menu, never over it. */
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        background: rgba(0,0,0,0.45);
+        z-index: 290;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+
+    /* Never allow an element to establish a wider mobile layout. */
+    .header,
+    .header-inner,
+    main,
+    .slider,
+    .intro,
+    .RestaurantFranchises,
+    .Express-Franchises,
+    .VillageDiv,
+    .OpeningSoon,
+    .site-footer {
+        max-width: 100%;
+    }
+
+    .hero-content {
+        min-width: 0;
+    }
+
+    .hero-title,
+    .hero-sub {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Small tablets and phones */
+@media (max-width: 768px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .header-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .slider {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hero-title {
+        max-width: 100%;
+    }
+
+    .hero-actions .btn {
+        max-width: 100%;
+    }
+
+    .franchise-img,
+    .RestaurantCard,
+    .villageimg,
+    .villageText,
+    .Express-Cards,
+    .iconColor {
+        min-width: 0;
+    }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+    .header-inner {
+        padding-left: 16px;
+        padding-right: 16px;
+        min-height: 58px;
+    }
+
+    .right-side {
+        padding: 18px 16px 24px;
+        max-height: calc(100vh - 58px);
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .slider {
+        height: clamp(430px, 78vh, 560px);
+    }
+
+    .hero-content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero-title {
+        font-size: clamp(28px, 8.5vw, 40px);
+        line-height: 1.12;
+        letter-spacing: -0.4px;
+    }
+
+    .hero-sub {
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+    .hero-actions {
+        width: 100%;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .intro,
+    .Express-Franchises,
+    .VillageDiv,
+    .OpeningSoon {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card-cotainer {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card-logo {
+        max-width: 100%;
+    }
+
+    .RestaurantText,
+    .cardflax,
+    .ExpressGrid,
+    .villageFlax,
+    .iconFlax {
+        max-width: 100%;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .header-inner {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .right-side {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .logo img {
+        width: 90px;
+    }
+
+    .hero-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .hero-title {
+        font-size: clamp(25px, 8vw, 32px);
+    }
+
+    .hero-sub {
+        font-size: 13.5px;
+    }
+
+    .hero-actions .btn {
+        max-width: 260px;
+    }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+    .right-side,
+    .nav-toggle span {
+        transition: none;
+    }
+}
+
+/* ============================================================
+   FINAL RESPONSIVE POLISH — MOBILE / SMALL TABLET
+   Root-level fix for full-width layout + clean mobile navigation.
+   ============================================================ */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: clip;
+}
+
+main,
+.header,
+.header-inner,
+.slider,
+.intro,
+.RestaurantFranchises,
+.Express-Franchises,
+.VillageDiv,
+.OpeningSoon,
+.site-footer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 1024px) {
+    /* Keep every mobile/tablet page edge-to-edge. */
+    .header-inner {
+        width: 100%;
+        max-width: 100%;
+        padding-left: clamp(16px, 3vw, 24px);
+        padding-right: clamp(16px, 3vw, 24px);
+    }
+
+    /* One, clean mobile navigation implementation. */
+    .right-side {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        max-height: calc(100dvh - 62px);
+        padding: 18px 20px 24px;
+        margin: 0;
+        background: rgba(10, 10, 12, 0.99);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 20px 45px rgba(0,0,0,.45);
+        transform: translateY(-12px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform .25s ease, opacity .2s ease, visibility 0s linear .25s;
+        overflow-x: hidden;
+        overflow-y: auto;
+        z-index: 301;
+    }
+
+    .right-side.nav-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition: transform .25s ease, opacity .2s ease, visibility 0s linear 0s;
+    }
+
+    .right-side nav,
+    .menu,
+    .menu li,
+    .menu li a,
+    .btns {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .menu li a {
+        display: flex;
+        align-items: center;
+        min-height: 52px;
+        padding: 14px 4px;
+        font-size: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .menu li a::after {
+        display: none;
+    }
+
+    .menu li:last-child a {
+        border-bottom: 0;
+    }
+
+    .btns {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .btn-one,
+    .btn-two {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+    }
+
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100dvh;
+        display: none;
+        background: rgba(0,0,0,.42);
+        z-index: 290;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+
+    /* Never allow reveal animations to create horizontal page overflow. */
+    .reveal-left,
+    .reveal-right {
+        will-change: transform, opacity;
+    }
+
+    .slider {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 760px;
+        min-width: 0;
+        padding-left: clamp(18px, 5vw, 40px);
+        padding-right: clamp(18px, 5vw, 40px);
+    }
+
+    .hero-title,
+    .hero-sub {
+        max-width: 100%;
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .intro,
+    .Express-Franchises,
+    .VillageDiv,
+    .OpeningSoon {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .card-cotainer,
+    .ExpressGrid,
+    .cardflax,
+    .villageFlax,
+    .iconFlax {
+        width: 100%;
+        max-width: var(--container);
+        min-width: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-inner {
+        min-height: 60px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .nav-toggle {
+        padding: 9px;
+    }
+
+    .nav-toggle span {
+        width: 24px;
+        height: 2px;
+    }
+
+    .slider {
+        height: clamp(500px, 78svh, 620px);
+    }
+
+    .hero-content {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(30px, 9vw, 42px);
+        line-height: 1.1;
+        letter-spacing: -.4px;
+    }
+
+    .hero-sub {
+        font-size: clamp(14px, 3.8vw, 16px);
+        line-height: 1.6;
+        margin-top: 16px;
+    }
+
+    .hero-actions {
+        width: 100%;
+        margin-top: 26px;
+        gap: 10px;
+    }
+
+    .hero-actions .btn {
+        width: min(100%, 290px);
+        min-height: 48px;
+    }
+
+    .intro {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .intro h2 {
+        font-size: clamp(22px, 7vw, 30px);
+    }
+
+    .intro h2 span {
+        font-size: clamp(24px, 8vw, 34px);
+        letter-spacing: 2px;
+    }
+
+    .card-cotainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 26px;
+        margin-top: 32px;
+    }
+
+    .card-logo {
+        width: min(100%, 250px);
+        height: 110px;
+    }
+
+    .cards {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .card-btn button {
+        min-height: 44px;
+    }
+
+    .cardflax,
+    .cardflax--reverse {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .RestaurantCard,
+    .franchise-img,
+    .villageimg,
+    .villageText,
+    .ExpressGrid,
+    .Express-Cards,
+    .iconFlax {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .Express-Franchises,
+    .VillageDiv,
+    .OpeningSoon {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    .header-inner {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .logo img {
+        width: 92px;
+    }
+
+    .hero-content {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .hero-title {
+        font-size: clamp(27px, 8.6vw, 34px);
+    }
+
+    .hero-sub {
+        font-size: 13.5px;
+    }
+
+    .hero-actions .btn {
+        width: min(100%, 270px);
+    }
+
+    .right-side {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+@media (max-width: 320px) {
+    .slider {
+        height: 500px;
+    }
+
+    .hero-title {
+        font-size: 26px;
+    }
+
+    .hero-sub {
+        font-size: 13px;
+    }
+
+    .intro,
+    .Express-Franchises,
+    .VillageDiv,
+    .OpeningSoon {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
